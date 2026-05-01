@@ -13,11 +13,12 @@ export const createClient = (cookieStore?: Awaited<ReturnType<typeof cookies>>) 
     supabaseUrl,
     supabaseKey,
     {
-      cookies: cookieStore ? {
+      cookies: {
         getAll() {
-          return cookieStore.getAll()
+          return cookieStore ? cookieStore.getAll() : []
         },
         setAll(cookiesToSet) {
+          if (!cookieStore) return
           try {
             cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options))
           } catch {
@@ -26,7 +27,7 @@ export const createClient = (cookieStore?: Awaited<ReturnType<typeof cookies>>) 
             // user sessions.
           }
         },
-      } : {},
+      },
     },
   );
 };
