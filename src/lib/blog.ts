@@ -1,13 +1,12 @@
 import { createClient } from '@/utils/supabase/server';
-import { cookies } from 'next/headers';
 
 export async function getPosts() {
-  const cookieStore = await cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
   
   const { data, error } = await supabase
     .from('posts')
-    .select('*, author:profiles(display_name)')
+    .select('*, author_profile:profiles(display_name)')
+    .eq('published', true)
     .order('created_at', { ascending: false });
 
   if (error) throw error;
@@ -15,13 +14,13 @@ export async function getPosts() {
 }
 
 export async function getPostBySlug(slug: string) {
-  const cookieStore = await cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
   
   const { data, error } = await supabase
     .from('posts')
-    .select('*, author:profiles(display_name)')
+    .select('*, author_profile:profiles(display_name)')
     .eq('slug', slug)
+    .eq('published', true)
     .single();
 
   if (error) return null;
@@ -35,7 +34,5 @@ export async function createPost(title: string, markdown: string, tags: string[]
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '');
 
-  // Note: This requires an active session via the client/server client
-  // In a real app, you'd call this from a Server Action
   return { title, slug, markdown, tags };
 }

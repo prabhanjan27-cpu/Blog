@@ -59,7 +59,7 @@ export default async function PostPage({ params }: PostPageProps) {
         <div className="flex items-center gap-6" style={{ borderTop: '1px solid var(--card-border)', borderBottom: '1px solid var(--card-border)', padding: '1.5rem 0' }}>
           <div className="flex items-center gap-2">
             <div style={{ width: '2rem', height: '2rem', borderRadius: '50%', background: 'linear-gradient(135deg, var(--accent), #8b5cf6)' }} />
-            <span style={{ fontSize: '0.875rem', fontWeight: 500 }}>{post.author?.display_name || 'Anonymous'}</span>
+            <span style={{ fontSize: '0.875rem', fontWeight: 500 }}>{post.author_profile?.display_name || 'Anonymous'}</span>
           </div>
           <div className="flex items-center gap-2" style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
             <Calendar size={16} />
