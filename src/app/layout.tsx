@@ -44,7 +44,17 @@ export default async function RootLayout({
                     <LogOut size={20} />
                   </button>
                 </form>
-                <div style={{ width: '2rem', height: '2rem', borderRadius: '50%', background: 'linear-gradient(135deg, var(--accent), #8b5cf6)', display: 'flex', alignItems: 'center', justifyCenter: 'center', fontSize: '0.75rem', fontWeight: 700 }}>
+                <div style={{
+                  width: '2rem',
+                  height: '2rem',
+                  borderRadius: '50%',
+                  background: 'linear-gradient(135deg, var(--accent), #8b5cf6)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '0.75rem',
+                  fontWeight: 700
+                }}>
                   {user.email?.[0].toUpperCase()}
                 </div>
               </div>
